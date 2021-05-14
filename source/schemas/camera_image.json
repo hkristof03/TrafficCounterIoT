@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CameraData",
+  "description": "Schema that identifies a document of a recorded camera image.",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "version": {
+      "description": "Schema version.",
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "cameraID": {
+      "description": "ID of the camera that recorded the image.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "createdTS": {
+      "description": "Timestamp of the creation.",
+      "type": "string",
+      "format": "datetime"
+    },
+    "imageID": {
+      "description": "ID of the recorded camera image.",
+      "type": "string"
+    },
+    "imagePath": {
+      "description": "Path to the recorded image.",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "cameraID",
+    "createdTS",
+    "imageID",
+    "imagePath"
+  ]
+}

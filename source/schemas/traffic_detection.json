@@ -1,0 +1,78 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TrafficDetection",
+  "description": "Schema that identifies a traffic detection for a recorded image",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "version": {
+      "description": "Schema version",
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "modelName": {
+      "description": "Name of the ML model that made the prediction",
+      "type": "string",
+      "default": "YOLO"
+    },
+    "cameraID": {
+      "description": "ID of the camera that recorded the image",
+      "type": "integer",
+      "minimum": 0
+    },
+    "imageID": {
+      "description": "ID of the recorded image",
+      "type": "string"
+    },
+    "imagePath": {
+      "description": "Path to the recorded image",
+      "type": "string"
+    },
+    "detectionTS": {
+      "description": "Timestamp of the detection",
+      "type": "string",
+      "format": "datetime"
+    },
+    "detection": {
+      "description": "Is there traffic or not",
+      "type": "boolean"
+    },
+    "numberOfObjects": {
+      "description": "Number of objects on the road",
+      "type": "integer",
+      "minimum": 0
+    },
+    "outputImagePath": {
+      "description": "Path of the output image with the bounding boxes",
+      "type": "string",
+      "default": ""
+    },
+    "boundingBoxes": {
+      "description": "Bounding boxes of the detected objects",
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "minItems": 0,
+        "uniqueItems": false
+      },
+      "minItems": 0,
+      "uniqueItems": false
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "modelName",
+    "cameraID",
+    "imageID",
+    "imagePath",
+    "detectionTS",
+    "detection",
+    "numberOfObjects",
+    "outputImagePath",
+    "boundingBoxes"
+  ]
+}
