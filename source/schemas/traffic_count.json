@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TrafficCount",
+  "description": "Schema that identifies a document of traffic count.",
+  "version": "1.0.0",
+  "type": "object",
+  "properties": {
+    "version": {
+      "description": "Schema version.",
+      "type": "string",
+      "default": "1.0.0"
+    },
+    "cameraID": {
+      "description": "ID of the camera that recorded the image",
+      "type": "integer",
+      "minimum": 0
+    },
+    "imageID": {
+      "description": "ID of the recorded camera image",
+      "type": "string"
+    },
+    "createdTS": {
+      "description": "Timestamp of the creation",
+      "type": "string",
+      "format": "datetime"
+    },
+    "modelName": {
+      "description": "Name of the ML model that made the prediction",
+      "type": "string",
+      "default": "YOLO"
+    },
+    "detectionTS": {
+      "description": "Timestamp of the creation",
+      "type": "string",
+      "format": "datetime"
+    },
+    "trafficCount": {
+      "description": "Number of objects on the road",
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "cameraID",
+    "imageID",
+    "createdTS",
+    "modelName",
+    "detectionTS",
+    "trafficCount"
+  ]
+}
