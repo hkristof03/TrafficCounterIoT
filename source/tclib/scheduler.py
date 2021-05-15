@@ -1,5 +1,5 @@
 from datetime import datetime
-from dateutil import tz, parser
+from dateutil import tz
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.cron import CronTrigger
@@ -9,8 +9,8 @@ from typing import Callable
 from tclib.tctools import tctools as tct
 
 
-SV_TIME_ZONE = "Europe/Budapest"
-SV_DATE_TIME_FORMAT = "%Y-%m-%dT%H:%M:%S:.%f%z"
+TC_TIME_ZONE = "Europe/Budapest"
+TC_DATE_TIME_FORMAT = "%Y-%m-%dT%H:%M:%S:.%f%z"
 
 
 class Scheduler(object):
@@ -85,12 +85,12 @@ class Scheduler(object):
     @staticmethod
     def now():
         # replace to config read
-        return datetime.now(tz.gettz(SV_TIME_ZONE))
+        return datetime.now(tz.gettz(TC_TIME_ZONE))
 
     @staticmethod
     def now_as_str():
         # replace to config read
-        return datetime.now(tz.gettz(SV_TIME_ZONE)).strftime(
-            SV_DATE_TIME_FORMAT
+        return datetime.now(tz.gettz(TC_TIME_ZONE)).strftime(
+            TC_DATE_TIME_FORMAT
         )
 
