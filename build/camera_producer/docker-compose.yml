@@ -1,0 +1,11 @@
+---
+version: '3.4'
+services:
+  # 1.0.0 - Initial version of highway camera simulator
+  camera_producer:
+    image: ${TCIoT_REGISTRY}/camera_producer:1.0.0
+    build:
+      context: ${TCIoT_HOME}/
+      dockerfile: ${TCIoT_HOME}/build/camera_producer/Dockerfile
+      args:
+        TCIoT_REGISTRY: ${TCIoT_REGISTRY}

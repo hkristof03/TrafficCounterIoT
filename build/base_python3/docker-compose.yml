@@ -1,0 +1,9 @@
+---
+version: '3'
+services:
+  base_python3:
+    image: ${TCIoT_REGISTRY}/base_python3:1.0.0
+    build:
+      context: .
+
+# 1.0.0 First version with basic python packages
