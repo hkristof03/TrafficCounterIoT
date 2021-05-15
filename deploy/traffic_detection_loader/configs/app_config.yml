@@ -1,0 +1,34 @@
+InfluxDBLoaderTC:
+  group_id: "traffic_count_loader005"
+  kafka_input_topic: "object_detections"
+  influx_db_config:
+    input_conf:
+      database: "tc_iot_time_series_db"
+      measurement: "traffic_detection"
+      query: "SELECT * FROM traffic count"
+
+    output_conf:
+      database: "tc_iot_time_series_db"
+      measurement: !!python/dict {"measurement": "traffic_detection"}
+      schema:
+        tags:
+          - modelName
+          - cameraID
+        time: detectionTS
+        fields:
+          - imageID
+          - imagePath
+          - createdTS
+          - detectionTS
+          - numberOfObjects
+          - detection
+          - detectedClasses
+          - boundingBoxes
+          - confidenceScores
+      type_map:
+        numberOfObjects: "int"
+      write_conf:
+        time_precision: "ms"
+        batch_size: 100
+        protocol: "json"
+

@@ -1,0 +1,14 @@
+---
+version: '3'
+
+services:
+  traffic_count_loader:
+    image: ${TCIoT_REGISTRY}/traffic_count_loader:1.0.0
+    hostname: tc_iot-traffic_detection_loader
+    container_name: tc_iot-traffic_detection_loader
+    restart: always
+    #command: sleep 3000
+    environment:
+      TCIoT_HOME: '/home/tcadm'
+    volumes:
+      - ${TCIoT_HOME}/deploy/traffic_detection_loader/configs/:/home/tcadm/configs/
