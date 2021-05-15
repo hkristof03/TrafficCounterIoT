@@ -15,3 +15,9 @@ kafka:
     topic_object_detections: 'object_detections'
   real_time_producer:
     topic: 'real_time_data'
+
+influx_db:
+  client_conf:
+    host: "192.168.1.105"
+    port: "8086"
+
