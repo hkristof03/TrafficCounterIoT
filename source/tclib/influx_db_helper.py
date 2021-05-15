@@ -7,10 +7,9 @@ from influxdb import InfluxDBClient
 from influxdb.exceptions import InfluxDBClientError
 import numpy as np
 
-from atomlib.atomtools import atomtools as atom
+from tclib.tctools import tctools as tct
 
-conf = atom.conf
-log = atom.log
+log = tct.log
 
 
 class InfluxDBLoader:
