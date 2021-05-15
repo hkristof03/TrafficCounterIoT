@@ -49,9 +49,9 @@ class ConfigReader:
         :param config_directory: Path to directory that contains .yaml files
         :return: List of .yaml files
         """
-        config_files = glob.glob(os.path.join(config_directory, '*.yaml'))
+        config_files = glob.glob(os.path.join(config_directory, '*.yml'))
         if not config_files:
-            svt.log.warning(
+            tct.log.warning(
                 "WARNING! No configuration files were detected at location: "
                 f"{config_directory}"
             )
