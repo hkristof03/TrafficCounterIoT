@@ -1,0 +1,4 @@
+camera_producer:
+  camera_id: 1
+  path_video: 'input'
+  path_save: 'output'

@@ -1,0 +1,16 @@
+---
+version: '3'
+
+services:
+  camera_producer:
+    image: ${TCIoT_REGISTRY}/camera_producer:1.0.0
+    hostname: tc_iot-camera_producer007
+    container_name: tc_iot-camera_producer007
+    restart: always
+    #command: sleep 3000
+    environment:
+      TCIoT_HOME: '/home/tcadm'
+    volumes:
+      - ${TCIoT_HOME}/source/camera/input/:/home/tcadm/input/
+      - ${TCIoT_HOME}/source/camera/output/:/home/tcadm/output/
+      - ${TCIoT_HOME}/deploy/camera_producer/configs/:/home/tcadm/configs/
