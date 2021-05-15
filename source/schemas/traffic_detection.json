@@ -28,6 +28,11 @@
       "description": "Path to the recorded image",
       "type": "string"
     },
+    "createdTS": {
+      "description": "Timestamp of the creation",
+      "type": "string",
+      "format": "datetime"
+    },
     "detectionTS": {
       "description": "Timestamp of the detection",
       "type": "string",
@@ -42,10 +47,14 @@
       "type": "integer",
       "minimum": 0
     },
-    "outputImagePath": {
-      "description": "Path of the output image with the bounding boxes",
-      "type": "string",
-      "default": ""
+    "detectedClasses": {
+      "description": "Detected object classes",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 0,
+      "uniqueItems": false
     },
     "boundingBoxes": {
       "description": "Bounding boxes of the detected objects",
@@ -60,6 +69,15 @@
       },
       "minItems": 0,
       "uniqueItems": false
+    },
+     "confidenceScores": {
+      "description": "List of confidence scores",
+      "type": "array",
+      "items": {
+        "type": "number"
+      },
+      "minItems": 0,
+      "uniqueItems": false
     }
   },
   "additionalProperties": false,
@@ -69,10 +87,12 @@
     "cameraID",
     "imageID",
     "imagePath",
+    "createdTS",
     "detectionTS",
     "detection",
     "numberOfObjects",
-    "outputImagePath",
-    "boundingBoxes"
+    "detectedClasses",
+    "boundingBoxes",
+    "confidenceScores"
   ]
 }
