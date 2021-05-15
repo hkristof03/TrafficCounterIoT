@@ -11,21 +11,21 @@
       "default": "1.0.0"
     },
     "cameraID": {
-      "description": "ID of the camera that recorded the image.",
+      "description": "ID of the camera that recorded the image",
       "type": "integer",
       "minimum": 0
     },
     "createdTS": {
-      "description": "Timestamp of the creation.",
+      "description": "Timestamp of the creation",
       "type": "string",
       "format": "datetime"
     },
     "imageID": {
-      "description": "ID of the recorded camera image.",
+      "description": "ID of the recorded camera image",
       "type": "string"
     },
     "imagePath": {
-      "description": "Path to the recorded image.",
+      "description": "Path to the recorded image",
       "type": "string"
     }
   },
