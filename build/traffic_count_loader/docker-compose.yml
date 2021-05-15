@@ -1,0 +1,11 @@
+---
+version: '3.4'
+services:
+  # 1.0.0 - Initial version of influxdb traffic count message loader
+  traffic_count_loader:
+    image: ${TCIoT_REGISTRY}/traffic_count_loader:1.0.0
+    build:
+      context: ${TCIoT_HOME}/
+      dockerfile: ${TCIoT_HOME}/build/traffic_count_loader/Dockerfile
+      args:
+        TCIoT_REGISTRY: ${TCIoT_REGISTRY}
