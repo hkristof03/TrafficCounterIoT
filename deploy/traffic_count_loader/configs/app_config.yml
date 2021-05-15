@@ -1,5 +1,5 @@
 InfluxDBLoaderTC:
-  group_id: "traffic_count_loader"
+  group_id: "traffic_count_loader002"
   kafka_input_topic: "traffic_count"
   influx_db_config:
     input_conf:
@@ -20,10 +20,6 @@ InfluxDBLoaderTC:
           - detectionTS
           - trafficCount
       type_map:
-        cameraID: "str"
-        modelName: "str"
-        imageID: "str"
-        detectionTS: "str"
         trafficCount: "int"
       write_conf:
         time_precision: "ms"
