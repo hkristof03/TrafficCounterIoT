@@ -129,6 +129,8 @@ class InfluxDBLoader:
                                 d_[i] = np.int64(data[i])
                             elif type_map[i] == 'float':
                                 d_[i] = float(data[i])
+                            else:
+                                d_[i] = str(data[i])
                         else:
                             d_[i] = str(data[i])
                     json_object.update({key: d_})
