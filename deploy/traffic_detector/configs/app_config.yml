@@ -1,0 +1,16 @@
+traffic_detector:
+  model_name: "yolov3"
+  path_weights:
+    - "yolo-coco"
+    - "yolov3.weights"
+  path_model_config:
+    - "yolo-coco"
+    - "yolov3.cfg"
+  path_classes:
+    - "yolo-coco"
+    - "coco.names"
+  kafka_input_topic: "camera_images"
+  kafka_output_topic_traffic_count: "traffic_count"
+  kafka_output_topic_object_detections: "object_detections"
+  confidence_threshold: 0.5
+  threshold_nms: 0.3

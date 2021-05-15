@@ -1,0 +1,15 @@
+---
+version: '3'
+
+services:
+  camera_producer:
+    image: ${TCIoT_REGISTRY}/traffic_detector:1.0.0
+    hostname: tc_iot-traffic_detector
+    container_name: tc_iot-traffic_detector
+    restart: always
+    #command: sleep 3000
+    environment:
+      TCIoT_HOME: '/home/tcadm'
+    volumes:
+      - ${TCIoT_HOME}/source/camera/output/:/home/tcadm/output/
+      - ${TCIoT_HOME}/deploy/traffic_detector/configs/:/home/tcadm/configs/
