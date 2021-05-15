@@ -3,21 +3,13 @@ version: '2'
 
 services:
   influxdb:
-    image: bitnami/influxdb:latest
-    container_name: tc_iot-influx
-    restart:
-      always
+    image: influxdb:1.8.0
+    container_name: tc_iot-influxdb
+    hostname: tct_iot-influxdb
+    restart: always
     ports:
-      - '8086:8086/tcp'
-    environment:
-      - INFLUXDB_ADMIN_USER=tc_iot_admin
-      - INFLUXDB_ADMIN_USER_PASSWORD=tc_iot_admin123
-      - INFLUXDB_ADMIN_USER_TOKEN=tc_iot_tokenp
-      - INFLUXDB_READ_USER=tc_iot_read
-      - INFLUXDB_READ_USER_PASSWORD=tc_iot_read123
-      - INFLUXDB_WRITE_USER=tc_iot_write
-      - INFLUXDB_WRITE_USER_PASSWORD=tc_iot_write123
-      - INFLUXDB_DB=tc_iot_time_series_data
-      - INFLUXDB_HTTP_READINESS_TIMEOUT=30
+      - 8086:8086
     volumes:
-      - ~/influx_db_data:/bitnami/influxdb
+      - ~/influx_db_data:/vol01/Docker/monitoring
+
+
