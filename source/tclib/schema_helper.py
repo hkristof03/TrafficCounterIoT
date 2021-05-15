@@ -22,17 +22,16 @@ class TrafficCounterSchemaError(Exception):
 
 
 class CameraImageSchemaError(TrafficCounterSchemaError):
-    """Error raised when a document that carries an X-ray image of a carried
-    object does not matches its defined schema.
-    """
     def __init__(self, message: str, payload: str = None) -> None:
         super().__init__(message, payload)
 
 
 class TrafficDetectionSchemaError(TrafficCounterSchemaError):
-    """Error raised when a document that carries a prediction for an X-ray
-    image does not matches its defined schema.
-    """
+    def __init__(self, message: str, payload: str = None) -> None:
+        super().__init__(message, payload)
+
+
+class TrafficCountSchemaError(TrafficCounterSchemaError):
     def __init__(self, message: str, payload: str = None) -> None:
         super().__init__(message, payload)
 
@@ -40,8 +39,9 @@ class TrafficDetectionSchemaError(TrafficCounterSchemaError):
 class SchemaErrorFactory(object):
 
     builder = {
-        'XRayScan': CameraImageSchemaError,
-        'ThreatPrediction': TrafficDetectionSchemaError
+        'CameraImage': CameraImageSchemaError,
+        'TrafficDetection': TrafficDetectionSchemaError,
+        'TrafficCount': TrafficCountSchemaError
     }
 
     @classmethod
@@ -127,11 +127,23 @@ class TrafficDetectionSchemaHelper(AbstractSchemaHelper):
         )
 
 
+class TrafficCountSchemaHelper(AbstractSchemaHelper):
+
+    def __init__(self):
+        super().__init__(
+            os.path.join(
+                os.getcwd(), 'schemas', 'traffic_count.json'
+            ),
+            'TrafficCount'
+        )
+
+
 class SchemaHelperFactory(object):
 
     builder = {
         'CameraImage': CameraImageSchemaHelper,
-        'TrafficDetection': TrafficDetectionSchemaHelper
+        'TrafficDetection': TrafficDetectionSchemaHelper,
+        'TrafficCount': TrafficCountSchemaHelper
     }
 
     @classmethod
