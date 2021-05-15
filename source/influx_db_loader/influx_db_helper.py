@@ -27,7 +27,7 @@ class InfluxDBLoader:
         try:
             log.info("Initializing InfluxDBClient...")
             self.client = InfluxDBClient(**self.client_conf)
-            #self.check_database_existence(database)
+            self.check_database_existence(database)
             self.client.switch_database(database)
             log.info(f"Connected to Influxdb database: {database}")
         except InfluxDBClientError:

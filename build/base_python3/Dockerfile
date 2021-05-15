@@ -27,6 +27,7 @@ RUN \
     pip3 install confluent-kafka==1.5.0 && \
     pip3 install python-dateutil && \
     pip3 install influxdb && \
+    pip3 install google-cloud-storage && \
     pip3 install python-firebase && \
     pip3 install imutils && \
     pip3 install numpy && \
