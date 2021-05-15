@@ -1,0 +1,17 @@
+kafka:
+  bootstrap.servers: '192.168.1.105:9092'
+  admin:
+    topics:
+      - 'camera_images'
+      - 'traffic_count'
+      - 'object_detections'
+      - 'real_time_data'
+  number_of_producers: 1
+
+  camera_producer:
+    topic: 'camera_images'
+  yolo_model:
+    topic_traffic_count: 'traffic_count'
+    topic_object_detections: 'object_detections'
+  real_time_producer:
+    topic: 'real_time_data'
