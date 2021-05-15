@@ -1,0 +1,11 @@
+---
+version: '3.4'
+services:
+  # 1.0.0 - Initial version of highway traffic detector
+  traffic_detector:
+    image: ${TCIoT_REGISTRY}/traffic_detector:1.0.0
+    build:
+      context: ${TCIoT_HOME}/
+      dockerfile: ${TCIoT_HOME}/build/traffic_detector/Dockerfile
+      args:
+        TCIoT_REGISTRY: ${TCIoT_REGISTRY}
