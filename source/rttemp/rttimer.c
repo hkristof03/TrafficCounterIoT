@@ -11,6 +11,16 @@
 
 #include "common.h"
 
+timer_t timerID;
+int count = 0;
+double startTime = 0.0;
+double elapsedSum = 0.0;
+rd_kafka_t *rk;
+const char *topic;
+const char *config_file;
+rd_kafka_conf_t *conf;
+int delivery_counter = 0;
+
 rd_kafka_t *create_producer(const char *topic, rd_kafka_conf_t *conf) {
     rd_kafka_t *rk;
     char errstr[512];
@@ -37,22 +47,9 @@ double getElapsedTime(double startTime) {
     return getTime() - startTime;
 }
 
-timer_t timerID;
-int count = 0;
-double startTime = 0.0;
-double elapsedSum = 0.0;
-rd_kafka_t *rk;
-const char *topic;
-const char *config_file;
-rd_kafka_conf_t *conf;
-int delivery_counter = 0;
-
 void handlerTimer(int signalnumber, siginfo_t *si, void *uc) {
 
-
     timer_t *timerIDp = si->si_value.sival_ptr;
-
-    count++;
 
      /* Produce messages */
     if(run) {
@@ -90,22 +87,22 @@ void handlerTimer(int signalnumber, siginfo_t *si, void *uc) {
         rd_kafka_flush(rk, 15*1000);
     }
 
-    if (count == 5) {
+    if (signalnumber == SIGINT) {
         //DISABLE AND DELETE THE TIMER
         //If the selected timer is already started, it will be disabled and
         //no signals or actions assigned to the timer will be delivered or executed.
         //A pending signal from an expired timer, however, will not be removed.
         timer_delete(timerID);
 
-
         //Terminates the process ("quits from while(1)")
+        printf("Keyboard Interrupt\n");
         raise(SIGTERM);
         exit(0);
     }
 }
 
 int main (int argc, char **argv) {
-    
+
     if (argc != 3) {
             fprintf(stderr, "Usage: %s <topic> <config-file>\n", argv[0]);
             exit(1);
@@ -149,6 +146,7 @@ int main (int argc, char **argv) {
     sigact.sa_sigaction = handlerTimer;
     sigact.sa_flags = SA_SIGINFO;
     sigaction(SIGRTMIN + 4, &sigact, NULL); //an alarm signal is set
+    sigaction(SIGINT, &sigact, NULL); //an alarm signal is set
 
     struct itimerspec timer;
     timer.it_interval.tv_sec = 3;       //it will be repeated after 3 seconds
