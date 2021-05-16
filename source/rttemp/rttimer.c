@@ -10,6 +10,7 @@
 #include <librdkafka/rdkafka.h>
 
 #include "common.h"
+#include "input_reader.h"
 
 timer_t timerID;
 int count = 0;
@@ -20,6 +21,8 @@ const char *topic;
 const char *config_file;
 rd_kafka_conf_t *conf;
 int delivery_counter = 0;
+FILE* stream; 
+
 
 rd_kafka_t *create_producer(const char *topic, rd_kafka_conf_t *conf) {
     rd_kafka_t *rk;
@@ -55,10 +58,18 @@ void handlerTimer(int signalnumber, siginfo_t *si, void *uc) {
     if(run) {
 
         const char *user = "default";
-        char json[64];
+        char json[128];
+
+        float a = input_reader(stream);
+        if (a < -999.0) {
+            // Reopen file
+            fclose(stream);
+            stream = fopen("input/weather.csv", "r");
+            float a = input_reader(stream);
+        }
 
         snprintf(json, sizeof(json),
-                    "{ \"count\": %d }", 123);
+                    "{\n\"version\": \"1.0.0\",\n\"temperature\": %lf,\n\"createdTS\": %u,\n\"rtdeviceID\": 1\n}", a, (unsigned)time(NULL));
 
         fprintf(stderr, "Producing message to %s: %s=%s\n",
                 topic, user, json);
@@ -111,6 +122,12 @@ int main (int argc, char **argv) {
     topic = argv[1];
     config_file = argv[2];
 
+    stream = fopen("input/weather.csv", "r");
+    if (stream == NULL) {
+        perror("Can't open file");
+        return 1;
+    }
+
     if (!(conf = read_config(config_file)))
             return 1;
 
@@ -149,9 +166,9 @@ int main (int argc, char **argv) {
     sigaction(SIGINT, &sigact, NULL); //an alarm signal is set
 
     struct itimerspec timer;
-    timer.it_interval.tv_sec = 3;       //it will be repeated after 3 seconds
+    timer.it_interval.tv_sec = 10;       //it will be repeated after 3 seconds
     timer.it_interval.tv_nsec = 0;      //nsec - nanoseconds - 10^(-9) seconds
-    timer.it_value.tv_sec = 3;          //remaining time till expiration
+    timer.it_value.tv_sec = 10;          //remaining time till expiration
     timer.it_value.tv_nsec = 0;
 
     //ARM THE TIMER
@@ -169,6 +186,7 @@ int main (int argc, char **argv) {
     }
 
     rd_kafka_destroy(rk);
+    fclose(stream);
 
     return 0;
 }
