@@ -1,0 +1,29 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "RealTimeData",
+    "description": "Temperature data from the realtime component.",
+    "version": "1.0.0",
+    "type": "object",
+    "properties": {
+        "version": {
+            "description": "Schema version.",
+            "type": "string",
+            "default": "1.0.0"
+        },
+        "temperature": {
+            "description": "Temperature data",
+            "type": "number"
+        },
+        "createdTS": {
+            "description": "Timestamp of the creation",
+            "type": "string",
+            "format": "datetime"
+        },
+        "rtdeviceID": {
+            "description": "ID of the rt device",
+            "type": "integer"
+        }
+    },
+    "additionalProperties": false,
+    "required": ["version", "temperature", "createdTS", "rtdeviceID"]
+}

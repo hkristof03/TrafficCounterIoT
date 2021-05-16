@@ -1,0 +1,11 @@
+---
+version: "3.4"
+services:
+  # 1.0.0 - Initial version of highway traffic detector
+  rttemp:
+    image: ${TCIoT_REGISTRY}/rttemp:1.0.0
+    build:
+      context: ${TCIoT_HOME}/
+      dockerfile: ${TCIoT_HOME}/build/rttemp/Dockerfile
+      args:
+        TCIoT_REGISTRY: ${TCIoT_REGISTRY}

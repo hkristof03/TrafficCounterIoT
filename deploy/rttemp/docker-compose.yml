@@ -1,0 +1,16 @@
+---
+version: "3"
+
+services:
+  rttemp:
+    image: ${TCIoT_REGISTRY}/rttemp:1.0.0
+    hostname: tc_iot-rttemp
+    container_name: tc_iot-rttemp
+    restart: always
+    #command: sleep 3000
+    cap_add:
+      - SYS_NICE
+    environment:
+      TCIoT_HOME: "/home/tcadm"
+    volumes:
+      - ${TCIoT_HOME}/deploy/rttemp/configs/:/home/tcadm/configs/
