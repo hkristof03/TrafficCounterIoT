@@ -1,0 +1,25 @@
+InfluxDBLoaderTC:
+  group_id: "real_time_data_loader001"
+  kafka_input_topic: "real_time_data"
+  influx_db_config:
+    input_conf:
+      database: "tc_iot_time_series_db"
+      measurement:  "real_time_data"
+      query: "SELECT * FROM real_time_data"
+
+    output_conf:
+      database: "tc_iot_time_series_db"
+      measurement: !!python/dict {"measurement": "real_time_data"}
+      schema:
+        tags:
+          - rtdeviceID
+        time: createdTS
+        fields:
+          - temperature
+      type_map:
+        trafficCount: "float"
+      write_conf:
+        time_precision: "ms"
+        batch_size: 100
+        protocol: "json"
+
