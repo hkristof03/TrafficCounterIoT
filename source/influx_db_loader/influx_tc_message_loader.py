@@ -35,15 +35,20 @@ class TrafficCountMessageLoader:
         :param message:
         :return:
         """
-        tct.log.info(f"Received message: {message}")
-        time = self.idbl.output_conf['schema']["time"]
-        message[time] = parser.isoparse(
-            message[time]).replace(tzinfo=tz.gettz(TC_TIME_ZONE))
-        self.messages.append(message)
+        try:
+            tct.log.info(f"Received message: {message}")
+            time = self.idbl.output_conf['schema']["time"]
+            message[time] = parser.isoparse(
+                message[time]).replace(tzinfo=tz.gettz(TC_TIME_ZONE))
+            self.messages.append(message)
 
-        if len(self.messages) > 10:
-            self.write_data_to_influx_db()
-            self.messages = []
+            if len(self.messages) > 10:
+                self.write_data_to_influx_db()
+                self.messages = []
+        except:
+            tct.log.error(
+                f"Unexpected event occurred! {traceback.format_exc()}"
+            )
 
     def write_data_to_influx_db(self) -> None:
         """
