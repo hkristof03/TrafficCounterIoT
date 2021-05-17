@@ -68,8 +68,15 @@ void handlerTimer(int signalnumber, siginfo_t *si, void *uc) {
             float a = input_reader(stream);
         }
 
+        struct tm ts;
+        time_t now;
+        time(&now);
+        ts = *localtime(&now);
+        char buf[80];
+        strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &ts);
+
         snprintf(json, sizeof(json),
-                    "{\n\"version\": \"1.0.0\",\n\"temperature\": %lf,\n\"createdTS\": %u,\n\"rtdeviceID\": 1\n}", a, (unsigned)time(NULL));
+                    "{\"version\": \"1.0.0\",\"temperature\": %lf,\"createdTS\": \"%s\", \"rtdeviceID\": 1}", a, buf);
 
         fprintf(stderr, "Producing message to %s: %s=%s\n",
                 topic, user, json);
