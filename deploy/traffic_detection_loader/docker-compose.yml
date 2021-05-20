@@ -12,3 +12,4 @@ services:
       TCIoT_HOME: '/home/tcadm'
     volumes:
       - ${TCIoT_HOME}/deploy/traffic_detection_loader/configs/:/home/tcadm/configs/
+      - ${TCIoT_HOME}/system/:/home/tcadm/system/
