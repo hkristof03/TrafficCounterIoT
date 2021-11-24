@@ -218,7 +218,7 @@ class TrafficDetector:
 if __name__ == '__main__':
     cr = tct.conf
     app_conf = cr.parse_yaml(
-        os.path.join(os.getcwd(), 'configs', 'app_config.yml')
+        os.path.join(os.getcwd(), 'configs', 'app_config.yaml')
     )['traffic_detector']
 
     td = TrafficDetector(**app_conf)

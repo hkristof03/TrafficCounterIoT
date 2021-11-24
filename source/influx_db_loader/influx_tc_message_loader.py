@@ -72,7 +72,7 @@ class TrafficCountMessageLoader:
 if __name__ == '__main__':
 
     app_conf = tct.conf.parse_yaml(
-        os.path.join(os.getcwd(), 'configs', 'app_config.yml')
+        os.path.join(os.getcwd(), 'configs', 'app_config.yaml')
     )['InfluxDBLoaderTC']
 
     ml = TrafficCountMessageLoader(**app_conf)
